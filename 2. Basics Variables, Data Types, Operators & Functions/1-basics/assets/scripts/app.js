@@ -4,6 +4,7 @@ let currentResult = defaultResult;
 
 function add(numberOne, numberTwo) {
     return numberOne + numberTwo
+    // alert('Hi there!') // Unreachable Code
 }
 
 alert(add(1, 2))
