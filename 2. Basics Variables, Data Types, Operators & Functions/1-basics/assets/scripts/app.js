@@ -2,6 +2,7 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 let logEntries = []
+let logEntry
 
 // This is a function that extracts the user input from the input field
 function getUserInput() {
@@ -19,8 +20,14 @@ function add() {
     const initialResult = currentResult
     currentResult += enteredNumber
     createAndWriteLog('+', initialResult, enteredNumber)
-    logEntries.push(enteredNumber)
-    console.log(logEntries[1])
+    logEntry = {
+        operation : 'ADD',
+        prevResult : initialResult,
+        number: enteredNumber,
+        result: currentResult
+    }
+    logEntries.push(logEntry)
+    console.log(logEntries)
 }
 
 function subtract() {
