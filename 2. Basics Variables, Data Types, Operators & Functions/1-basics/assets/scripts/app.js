@@ -2,7 +2,6 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 let logEntries = []
-let logEntry
 
 // This is a function that extracts the user input from the input field
 function getUserInput() {
@@ -15,20 +14,24 @@ function createAndWriteLog(operator, resultBeforeCalc, calcNumber) {
     outputResult(currentResult, calcDescription) // from vendor file
 }
 
+function writeToLog(operationIdentifier, prevResult, operationNumber, newResult) {
+    const logEntry = {
+        operation : operationIdentifier,
+        prevResult : prevResult,
+        number: operationNumber,
+        result: newResult
+    }
+    logEntries.push(logEntry)
+    console.log(logEntry.operation)
+    console.log(logEntries)
+}
+
 function add() {
     const enteredNumber = getUserInput()
     const initialResult = currentResult
     currentResult += enteredNumber
     createAndWriteLog('+', initialResult, enteredNumber)
-    logEntry = {
-        operation : 'ADD',
-        prevResult : initialResult,
-        number: enteredNumber,
-        result: currentResult
-    }
-    logEntries.push(logEntry)
-    console.log(logEntry.operation)
-    console.log(logEntries)
+    writeToLog('ADD', initialResult, enteredNumber, currentResult)
 }
 
 function subtract() {
@@ -36,6 +39,7 @@ function subtract() {
     const initialResult = currentResult
     currentResult -= enteredNumber
     createAndWriteLog('-', initialResult, enteredNumber)
+    writeToLog('SUBTRACT', initialResult, enteredNumber, currentResult)
 }
 
 function multiply() {
@@ -43,6 +47,7 @@ function multiply() {
     const initialResult = currentResult
     currentResult *= enteredNumber
     createAndWriteLog('*', initialResult, enteredNumber)
+    writeToLog('MULTIPLY', initialResult, enteredNumber, currentResult)
 }
 
 function divide() {
@@ -50,11 +55,13 @@ function divide() {
     const initialResult = currentResult
     currentResult /= enteredNumber
     createAndWriteLog('/', initialResult, enteredNumber)
+    writeToLog('DIVIDE', initialResult, enteredNumber, currentResult)
 }
 
-alert(++currentResult) // return the value after it changed
-alert(currentResult++) // return the value before it changed
-
+//
+// alert(++currentResult) // return the value after it changed
+// alert(currentResult++) // return the value before it changed
+//
 
 addBtn.addEventListener('click', add)
 subtractBtn.addEventListener('click', subtract)
