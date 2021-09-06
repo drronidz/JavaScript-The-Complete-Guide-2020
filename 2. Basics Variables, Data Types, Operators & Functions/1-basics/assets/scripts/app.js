@@ -6,18 +6,45 @@ function getUserInput() {
     return parseInt(userInput.value)
 }
 
+function createAndWriteLog(operator, resultBeforeCalc, calcNumber) {
+    const calcDescription = `${resultBeforeCalc} ${operator} ${calcNumber}`
+    outputResult(currentResult, calcDescription)
+}
+
 function add() {
     const enteredNumber = getUserInput()
-    const description = `${currentResult} + ${enteredNumber}`
-    currentResult = currentResult.toString() + enteredNumber
-    // currentResult = currentResult + +userInput.value
-    outputResult(currentResult, description)
-    // alert('Hi there!') // Unreachable Code
+    const initialResult = currentResult
+    currentResult = currentResult + enteredNumber
+    createAndWriteLog('+', initialResult, enteredNumber)
+}
+
+function subtract() {
+    const enteredNumber = getUserInput()
+    const initialResult = currentResult
+    currentResult = currentResult - enteredNumber
+    createAndWriteLog('-', initialResult, enteredNumber)
+
+}
+
+function multiply() {
+    const enteredNumber = getUserInput()
+    const initialResult = currentResult
+    currentResult = currentResult * enteredNumber
+    createAndWriteLog('*', initialResult, enteredNumber)
+
+}
+
+function divide() {
+    const enteredNumber = getUserInput()
+    const initialResult = currentResult
+    currentResult = currentResult / enteredNumber
+    createAndWriteLog('/', initialResult, enteredNumber)
+
 }
 
 addBtn.addEventListener('click', add)
-
-
-let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
+subtractBtn.addEventListener('click', subtract)
+multiplyBtn.addEventListener('click', multiply)
+divideBtn.addEventListener('click', divide)
 
 
