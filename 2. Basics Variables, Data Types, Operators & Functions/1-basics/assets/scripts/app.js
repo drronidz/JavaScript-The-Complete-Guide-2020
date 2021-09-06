@@ -2,10 +2,16 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
+function getUserInput() {
+    return parseInt(userInput.value)
+}
+
 function add() {
-    currentResult = currentResult.toString() + parseInt(userInput.value)
+    const enteredNumber = getUserInput()
+    const description = `${currentResult} + ${enteredNumber}`
+    currentResult = currentResult.toString() + enteredNumber
     // currentResult = currentResult + +userInput.value
-    outputResult(currentResult, '')
+    outputResult(currentResult, description)
     // alert('Hi there!') // Unreachable Code
 }
 
