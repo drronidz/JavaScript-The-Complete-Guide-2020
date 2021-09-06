@@ -2,13 +2,15 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
+// This is a function that extracts the user input from the input field
 function getUserInput() {
     return parseInt(userInput.value)
 }
 
+// Generates and writes calculation log
 function createAndWriteLog(operator, resultBeforeCalc, calcNumber) {
     const calcDescription = `${resultBeforeCalc} ${operator} ${calcNumber}`
-    outputResult(currentResult, calcDescription)
+    outputResult(currentResult, calcDescription) // from vendor file
 }
 
 function add() {
@@ -23,7 +25,6 @@ function subtract() {
     const initialResult = currentResult
     currentResult = currentResult - enteredNumber
     createAndWriteLog('-', initialResult, enteredNumber)
-
 }
 
 function multiply() {
@@ -31,7 +32,6 @@ function multiply() {
     const initialResult = currentResult
     currentResult = currentResult * enteredNumber
     createAndWriteLog('*', initialResult, enteredNumber)
-
 }
 
 function divide() {
@@ -39,7 +39,6 @@ function divide() {
     const initialResult = currentResult
     currentResult = currentResult / enteredNumber
     createAndWriteLog('/', initialResult, enteredNumber)
-
 }
 
 addBtn.addEventListener('click', add)
