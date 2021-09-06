@@ -16,30 +16,34 @@ function createAndWriteLog(operator, resultBeforeCalc, calcNumber) {
 function add() {
     const enteredNumber = getUserInput()
     const initialResult = currentResult
-    currentResult = currentResult + enteredNumber
+    currentResult += enteredNumber
     createAndWriteLog('+', initialResult, enteredNumber)
 }
 
 function subtract() {
     const enteredNumber = getUserInput()
     const initialResult = currentResult
-    currentResult = currentResult - enteredNumber
+    currentResult -= enteredNumber
     createAndWriteLog('-', initialResult, enteredNumber)
 }
 
 function multiply() {
     const enteredNumber = getUserInput()
     const initialResult = currentResult
-    currentResult = currentResult * enteredNumber
+    currentResult *= enteredNumber
     createAndWriteLog('*', initialResult, enteredNumber)
 }
 
 function divide() {
     const enteredNumber = getUserInput()
     const initialResult = currentResult
-    currentResult = currentResult / enteredNumber
+    currentResult /= enteredNumber
     createAndWriteLog('/', initialResult, enteredNumber)
 }
+
+alert(++currentResult) // return the value after it changed
+alert(currentResult++) // return the value before it changed
+
 
 addBtn.addEventListener('click', add)
 subtractBtn.addEventListener('click', subtract)
