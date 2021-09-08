@@ -27,23 +27,25 @@ function writeToLog(operationIdentifier, prevResult, operationNumber, newResult)
 }
 
 function calculationResult(calculationType) {
+    const enteredNumber = getUserInput()
     if(
         calculationType !== 'ADD' &&
         calculationType !== 'SUBTRACT' &&
         calculationType !== 'MULTIPLY' &&
-        calculationType !== 'DIVIDE'
+        calculationType !== 'DIVIDE' ||
+        !enteredNumber
     ) {
         return
     }
 
-    if(
-        calculationType === 'ADD' ||
-        calculationType === 'SUBTRACT' ||
-        calculationType === 'MULTIPLY' ||
-        calculationType === 'DIVIDE'
-    )
+    // if(
+    //     calculationType === 'ADD' ||
+    //     calculationType === 'SUBTRACT' ||
+    //     calculationType === 'MULTIPLY' ||
+    //     calculationType === 'DIVIDE'
+    // )
 
-    const enteredNumber = getUserInput()
+
     const initialResult = currentResult;
     let mathOperator;
     if(calculationType === 'ADD') {
