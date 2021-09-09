@@ -1,4 +1,6 @@
+const NORMAL_ATTACK = 'NORMAL_ATTACK' // NORMAL_ATTACK = 0
 const NORMAL_ATTACK_VALUE = 10
+const STRONG_ATTACK = 'STRONG_ATTACK' // STRONG_ATTACK = 1
 const STRONG_ATTACK_VALUE = 17
 const MONSTER_ATTACK_VALUE = 14
 const HEAL_VALUE = 20
@@ -53,9 +55,9 @@ function endRound() {
 
 function attackMonster(mode) {
     let maxDamage;
-    if(mode === 'NORMAL_ATTACK') {
+    if(mode === NORMAL_ATTACK) {
         maxDamage = NORMAL_ATTACK_VALUE
-    } else if (mode === 'STRONG_ATTACK') {
+    } else if (mode === STRONG_ATTACK) {
         maxDamage = STRONG_ATTACK_VALUE
     }
 
@@ -65,12 +67,12 @@ function attackMonster(mode) {
 }
 
 function attackHandler() {
-    attackMonster('NORMAL_ATTACK')
+    attackMonster(NORMAL_ATTACK)
     endRound()
 }
 
 function strongAttackHandler() {
-    attackMonster('STRONG_ATTACK')
+    attackMonster(STRONG_ATTACK)
 }
 
 function healPlayerHandler() {
