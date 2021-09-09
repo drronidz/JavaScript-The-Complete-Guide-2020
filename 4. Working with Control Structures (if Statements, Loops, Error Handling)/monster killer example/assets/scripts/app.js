@@ -5,7 +5,7 @@ const STRONG_ATTACK_VALUE = 17
 const MONSTER_ATTACK_VALUE = 14
 const HEAL_VALUE = 20
 
-const LOG_EVENT_PLAYER_NORMAL_ATTACK = 'PLAYER_ATTACK'
+const LOG_EVENT_PLAYER_NORMAL_ATTACK = 'PLAYER_NORMAL_ATTACK'
 const LOG_EVENT_PLAYER_STRONG_ATTACK = 'PLAYER_STRONG_ATTACK'
 const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK'
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL'
@@ -201,16 +201,20 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-    for(let i = 0; i < battleLog.length; i++) {
-        console.log('---------------------')
-    }
+    // for(let i = 0; i < battleLog.length; i++) {
+    //     console.log(`---------- ${i} ----------`)
+    //     console.log(battleLog[i])
+    //     console.log(`---------- ${i} ----------`)
+    // }
 
     // for (let i = 10; i > 0; i--) {
     //     i--;
     //     console.log(i)
     // }
 
-    console.log(battleLog)
+    for(const logEntry of battleLog) {
+        console.log(logEntry)
+    }
 }
 
 attackBtn.addEventListener('click', attackHandler)
