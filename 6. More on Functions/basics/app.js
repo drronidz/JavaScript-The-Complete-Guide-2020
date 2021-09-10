@@ -4,7 +4,11 @@ const startGameBtn = document.getElementById('start-game-btn');
 //     console.log('Game is starting...')
 // }
 
-const start = function () {
+const startOne = function() {
+    console.log('Game is starting...')
+}
+
+const start = function startGame() {
     console.log('Game is starting...')
 }
 
