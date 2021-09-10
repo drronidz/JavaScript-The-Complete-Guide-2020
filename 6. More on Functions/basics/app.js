@@ -25,5 +25,5 @@ console.log(typeof start)
 console.dir(start)
 
 startGameBtn.addEventListener('click', function () {
-    console.log('Game is starting...', age)
+    console.log('Game is starting...')
 })
