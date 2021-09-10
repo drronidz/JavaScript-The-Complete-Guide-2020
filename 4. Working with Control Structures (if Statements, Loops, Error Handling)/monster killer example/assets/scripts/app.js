@@ -11,8 +11,6 @@ const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK'
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL'
 const LOG_EVENT_GAME_OVER = 'GAME_OVER'
 
-
-
 let battleLog = []
 let lastLoggedEntry
 
@@ -25,8 +23,6 @@ function getMaxLifeValues() {
     }
     return parsedValue
 }
-
-
 
 let chosenMaxLife 
 
