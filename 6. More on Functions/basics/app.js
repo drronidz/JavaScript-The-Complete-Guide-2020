@@ -24,4 +24,6 @@ const start = function startGame() {
 console.log(typeof start)
 console.dir(start)
 
-startGameBtn.addEventListener('click', start)
+startGameBtn.addEventListener('click', function () {
+    console.log('Game is starting...', age)
+})
