@@ -34,25 +34,36 @@ const getComputerChoice = function() {
     }
 }
 
-const getWinner = function (computerChoice, playerChoice) {
-    if(computerChoice === playerChoice) {
-        return RESULT_DRAW
-    } else if (computerChoice === ROCK && playerChoice === SCISSORS) {
-        return RESULT_COMPUTER_WINS
-    } else if (computerChoice === SCISSORS && playerChoice === ROCK) {
-        return RESULT_PLAYER_WINS
-    } else if (computerChoice === SCISSORS && playerChoice === PAPER) {
-        return RESULT_COMPUTER_WINS
-    } else if (computerChoice === PAPER && playerChoice === SCISSORS) {
-        return RESULT_PLAYER_WINS
-    } else if (computerChoice === PAPER && playerChoice === ROCK) {
-        return RESULT_COMPUTER_WINS
-    } else if (computerChoice === ROCK && playerChoice === PAPER) {
-        return RESULT_PLAYER_WINS
-    }
+// Arrow Function
+// const getWinner = (computerChoice, playerChoice) => {
+//     if(computerChoice === playerChoice) {
+//         return RESULT_DRAW
+//     } else if (computerChoice === ROCK && playerChoice === SCISSORS) {
+//         return RESULT_COMPUTER_WINS
+//     } else if (computerChoice === SCISSORS && playerChoice === ROCK) {
+//         return RESULT_PLAYER_WINS
+//     } else if (computerChoice === SCISSORS && playerChoice === PAPER) {
+//         return RESULT_COMPUTER_WINS
+//     } else if (computerChoice === PAPER && playerChoice === SCISSORS) {
+//         return RESULT_PLAYER_WINS
+//     } else if (computerChoice === PAPER && playerChoice === ROCK) {
+//         return RESULT_COMPUTER_WINS
+//     } else if (computerChoice === ROCK && playerChoice === PAPER) {
+//         return RESULT_PLAYER_WINS
+//     }
+// }
+
+const getWinner = (computerChoice, playerChoice) => {
+    return computerChoice === playerChoice
+        ? RESULT_DRAW
+        : (computerChoice === ROCK && playerChoice === PAPER) ||
+        (computerChoice === PAPER && playerChoice === SCISSORS) ||
+        (computerChoice === SCISSORS && playerChoice === ROCK)
+        ? RESULT_PLAYER_WINS
+        : RESULT_COMPUTER_WINS
 }
 
-startGameBtn.addEventListener('click', function () {
+startGameBtn.addEventListener('click', () => {
     if(gameIsRunning) {
         return
     }
@@ -63,5 +74,5 @@ startGameBtn.addEventListener('click', function () {
     const winner = getWinner(computerChoice, playerChoice)
     console.log(`Player choice is :${playerChoice}`)
     console.log(`Computer choice is :${computerChoice}`)
-    console.log(`The winner is :${winner}`)
+    console.log(`${winner}`)
 })
