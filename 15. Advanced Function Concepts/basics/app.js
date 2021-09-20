@@ -62,3 +62,15 @@ let name = 'Joe'
 userName= 'Manual'
 
 greetUser()
+
+// Closure & memory management
+
+// Recursion
+
+function powerOf(x, n) {
+    return n === 1 ? x : x * powerOf(x, n - 1)
+}
+
+
+
+console.log(powerOf(2,3)) // 2 * 2 * 2
