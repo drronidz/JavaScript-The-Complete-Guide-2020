@@ -71,6 +71,47 @@ function powerOf(x, n) {
     return n === 1 ? x : x * powerOf(x, n - 1)
 }
 
-
-
 console.log(powerOf(2,3)) // 2 * 2 * 2
+
+// Advanced Recursion
+
+const myself = {
+    name: 'Max',
+    friends: [
+        {
+            name: 'Manual',
+            friends: [
+                {
+                    name: 'Chris',
+                    friends: [
+                        {
+                            name: 'Harry'
+                        },
+                        {
+                            name: 'Amelia'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'Julia'
+        }
+    ]
+}
+
+function getFriendNames(person) {
+   const collectedNames = []
+
+    if (!person.friends) { // The condition that ends the loop !!
+        return []
+    } else {
+        for (const friend of person.friends) {
+            collectedNames.push(friend.name)
+            collectedNames.push(...getFriendNames(friend))
+        }
+    }
+    return collectedNames
+}
+
+console.log(getFriendNames(myself))
