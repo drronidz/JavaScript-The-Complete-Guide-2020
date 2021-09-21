@@ -28,3 +28,25 @@ const productPrice = 29.99
 
 const productOutput = productDescription`This product (${productName}) is ${productPrice}.`
 console.log(productOutput)
+
+// Introducing Regular expressions (RegEx)
+
+const regex = /hello/
+
+console.log(regex.test('hello'))
+console.log(regex.test('hi there, hello'))
+console.log(regex.test('hi there, hello ...'))
+
+const regexTwo = /([hH])ello/
+
+console.log(regexTwo.test('hello'))
+console.log(regexTwo.test('hi - hello'))
+console.log(regexTwo.test('hi - hello ...'))
+console.log(regexTwo.test('hi - Hello ...'))
+console.log(regexTwo.test('hi - ello ...'))
+
+const regexThree = /.ello/
+console.log(regexThree.test('hello'))
+console.log(regexThree.test('Jello'))
+
+
