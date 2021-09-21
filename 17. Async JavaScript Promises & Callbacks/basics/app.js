@@ -3,10 +3,12 @@ const output = document.querySelector('p');
 
 const getPosition = (options) => {
   const promise = new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(success => {
-      resolve(success)
-    }, error => {
-
+    navigator.geolocation.getCurrentPosition(
+        success => {
+          resolve(success)
+    },
+            error => {
+          reject(error)
     }, options)
   })
   return promise
@@ -28,9 +30,16 @@ function trackUserHandler() {
         positionDATA = posDATA
         return setTimer(2000)
   })
+      .catch(error => { // then blocks after catch will be executed!
+        console.log(error)
+      })
+
       .then(data => {
         console.log(data, positionDATA)
       })
+
+
+
   setTimer(1000).then(() => {
     console.log('Timer done!')
   })
