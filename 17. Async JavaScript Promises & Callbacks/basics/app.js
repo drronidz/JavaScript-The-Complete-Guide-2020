@@ -23,22 +23,22 @@ const setTimer = (duration) => {
   return promise
 }
 
-function trackUserHandler() {
-  let positionDATA
-  getPosition()
-      .then(posDATA => {
-        positionDATA = posDATA
-        return setTimer(2000)
-  })
-      .catch(error => { // then blocks after catch will be executed!
-        console.log(error)
-      })
+async function trackUserHandler() {
+  //let positionDATA
+  const posDATA = await getPosition()
+  const timerData = await setTimer(2000)
+  console.log(timerData, posDATA)
+  //     .then(posDATA => {
+  //       positionDATA = posDATA
+  //       return setTimer(2000)
+  // })
+  //     .catch(error => { // then blocks after catch will be executed!
+  //       console.log(error)
+  //     })
 
-      .then(data => {
-        console.log(data, positionDATA)
-      })
-
-
+      // .then(data => {
+      //   console.log(data, positionDATA)
+      // })
 
   setTimer(1000).then(() => {
     console.log('Timer done!')
