@@ -2,6 +2,7 @@ const listElement = document.querySelector('.posts')
 const postTemplate = document.getElementById('post-template')
 const form = document.querySelector('#new-post form')
 const fetchButton = document.querySelector('#available-posts button')
+const postList = document.querySelector('ul')
 
 
 function sendHTTPRequest(method, url, data) {
@@ -11,11 +12,15 @@ function sendHTTPRequest(method, url, data) {
         xmlHttpRequest.responseType = 'json'
 
         xmlHttpRequest.onload = function () {
-            resolve(xmlHttpRequest.response)
-            // console.log(xmlHttpRequest.response)
-            // const listOfPosts = xmlHttpRequest.response // We cannot use it like this because it's a json
-            // const listOfPosts = JSON.parse(xmlHttpRequest.response)
+            if(xmlHttpRequest.status >= 200 && xmlHttpRequest.status < 300) {
+                resolve(xmlHttpRequest.response)
+            } else {
+                reject(new Error('Something went wrong!'))
+            }
+        }
 
+        xmlHttpRequest.onerror = function () {
+            reject(new Error('Failed to send request!'))
         }
         xmlHttpRequest.send(JSON.stringify(data))
 
@@ -23,13 +28,19 @@ function sendHTTPRequest(method, url, data) {
 }
 
 async function fetchPosts() {
-    const listOfPosts = await sendHTTPRequest('GET', 'https://jsonplaceholder.typicode.com/posts')
-    for (const post of listOfPosts) {
-        const postElement = document.importNode(postTemplate.content, true)
-        postElement.querySelector('h2').textContent = post.title.toUpperCase()
-        postElement.querySelector('p').textContent = post.body
-        listElement.append(postElement)
+    try {
+        const listOfPosts = await sendHTTPRequest('GET', 'https://jsonplaceholder.typicode.com/poss')
+        for (const post of listOfPosts) {
+            const postElement = document.importNode(postTemplate.content, true)
+            postElement.querySelector('h2').textContent = post.title.toUpperCase()
+            postElement.querySelector('p').textContent = post.body
+            postElement.querySelector('li').id = post.id
+            listElement.append(postElement)
+        }
+    } catch (error) {
+        alert(error.message)
     }
+
 }
 
 // Sending a GET Request ...
@@ -46,12 +57,20 @@ async function createPost(title, content) {
 
 // Trigger a request via User Interface!
 fetchButton.addEventListener('click',  fetchPosts)
+
 form.addEventListener('submit', event => {
     event.preventDefault()
     const enteredTitle = event.currentTarget.querySelector('#title').value
     const enteredContent = event.currentTarget.querySelector('#content').value
 
     createPost(enteredTitle, enteredContent)
+})
+
+postList.addEventListener('click', event => {
+    if(event.target.tagName === 'BUTTON') {
+        const postId = event.target.closest('li').id
+        sendHTTPRequest('DELETE', `https://jsonplaceholder.typicode.com/posts/${postId}`)
+    }
 })
 
 
