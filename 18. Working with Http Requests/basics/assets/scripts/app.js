@@ -1,5 +1,8 @@
 const listElement = document.querySelector('.posts')
 const postTemplate = document.getElementById('post-template')
+const form = document.querySelector('#new-post form')
+const fetchButton = document.querySelector('#available-posts button')
+
 
 function sendHTTPRequest(method, url, data) {
     return new Promise((resolve, reject) => {
@@ -41,8 +44,16 @@ async function createPost(title, content) {
     sendHTTPRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post)
 }
 
-fetchPosts()
-createPost('DUMMY', 'A Dummy post!')
+// Trigger a request via User Interface!
+fetchButton.addEventListener('click',  fetchPosts)
+form.addEventListener('submit', event => {
+    event.preventDefault()
+    const enteredTitle = event.currentTarget.querySelector('#title').value
+    const enteredContent = event.currentTarget.querySelector('#content').value
+
+    createPost(enteredTitle, enteredContent)
+})
+
 
 
 
