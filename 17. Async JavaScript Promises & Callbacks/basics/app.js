@@ -65,6 +65,28 @@ async function trackUserHandlerTwo() {
 
 button.addEventListener('click', trackUserHandlerOne);
 
+Promise.race([
+  getPosition(),
+  setTimer(1000)
+]).then(data => {
+  console.log(data)
+})
+
+Promise.all([
+  getPosition(),
+  setTimer(1000)
+]).then(data => {
+  console.log(data)
+})
+
+Promise.allSettled([
+  getPosition(),
+  setTimer(1000)
+]).then(data => {
+  console.log(data)
+})
+
+
 // let result = 0
 //
 // for (let i = 0; i < 10000000; i++) {
