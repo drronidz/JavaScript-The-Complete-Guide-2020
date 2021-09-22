@@ -5,7 +5,8 @@ const fetchButton = document.querySelector('#available-posts button')
 const postList = document.querySelector('ul')
 
 
-function sendHTTPRequest(method, url, data) {
+function sendHTTPRequestOLD(method, url, data) {
+    // The old way of sending HTTP Request via xmlHttpRequest
     return new Promise((resolve, reject) => {
         const xmlHttpRequest = new XMLHttpRequest()
         xmlHttpRequest.open(method, url)
@@ -27,9 +28,19 @@ function sendHTTPRequest(method, url, data) {
     })
 }
 
+function sendHTTPRequestMODERN(method, url, data) {
+    // The modern way of sending HTTP Request via fetch API (Application Programming Interface)
+    return fetch(url, {
+        method : method,
+        body: JSON.stringify(data)
+    }).then(response => {
+        return response.json()
+    })
+}
+
 async function fetchPosts() {
     try {
-        const listOfPosts = await sendHTTPRequest('GET', 'https://jsonplaceholder.typicode.com/poss')
+        const listOfPosts = await sendHTTPRequestMODERN('GET', 'https://jsonplaceholder.typicode.com/posts')
         for (const post of listOfPosts) {
             const postElement = document.importNode(postTemplate.content, true)
             postElement.querySelector('h2').textContent = post.title.toUpperCase()
@@ -52,7 +63,7 @@ async function createPost(title, content) {
         userId: userId
     }
 
-    sendHTTPRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post)
+    sendHTTPRequestOLD('POST', 'https://jsonplaceholder.typicode.com/posts', post)
 }
 
 // Trigger a request via User Interface!
@@ -69,7 +80,7 @@ form.addEventListener('submit', event => {
 postList.addEventListener('click', event => {
     if(event.target.tagName === 'BUTTON') {
         const postId = event.target.closest('li').id
-        sendHTTPRequest('DELETE', `https://jsonplaceholder.typicode.com/posts/${postId}`)
+        sendHTTPRequestOLD('DELETE', `https://jsonplaceholder.typicode.com/posts/${postId}`)
     }
 })
 
