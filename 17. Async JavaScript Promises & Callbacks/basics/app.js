@@ -22,9 +22,29 @@ const setTimer = (duration) => {
   })
   return promise
 }
+function trackUserHandlerOne() {
+  let positionDATA
+  getPosition()
+      .then(posDATA => {
+        positionDATA = posDATA
+        return setTimer(2000)
+      })
+      .catch(error => { // then blocks after catch will be executed!
+        console.log(error)
+      })
 
-async function trackUserHandler() {
-  //let positionDATA
+      .then(data => {
+        console.log(data, positionDATA)
+      })
+
+  // the execution of this is before the try-catch block!
+  setTimer(1000).then(() => {
+    console.log('Timer done!')
+  })
+  console.log('Getting position')
+}
+async function trackUserHandlerTwo() {
+
   let posDATA
   let timerData
   try {
@@ -36,25 +56,14 @@ async function trackUserHandler() {
 
   console.log(timerData, posDATA)
 
-  //     .then(posDATA => {
-  //       positionDATA = posDATA
-  //       return setTimer(2000)
-  // })
-  //     .catch(error => { // then blocks after catch will be executed!
-  //       console.log(error)
-  //     })
-
-      // .then(data => {
-      //   console.log(data, positionDATA)
-      // })
-
+  // the execution of this is after the try-catch block!
   setTimer(1000).then(() => {
     console.log('Timer done!')
   })
   console.log('Getting position')
 }
 
-button.addEventListener('click', trackUserHandler);
+button.addEventListener('click', trackUserHandlerOne);
 
 // let result = 0
 //
