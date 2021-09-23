@@ -33,10 +33,11 @@ function sendHTTPRequestMODERN(method, url, data) {
     // The modern way of sending HTTP Request via fetch API (Application Programming Interface)
     return fetch(url, {
         method : method,
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        body: data,
+        // body: JSON.stringify(data),
+        // headers: {
+        //     'Content-Type': 'application/json'
+        // }
     })
         .then(response => {
             if (response.status >= 200 && response.status < 300) {
@@ -56,7 +57,7 @@ function sendHTTPRequestMODERN(method, url, data) {
 
 async function fetchPosts() {
     try {
-        const listOfPosts = await sendHTTPRequestMODERN('GET', 'https://jsonplaceholder.typicode.com/pos')
+        const listOfPosts = await sendHTTPRequestMODERN('GET', 'https://jsonplaceholder.typicode.com/posts')
         for (const post of listOfPosts) {
             const postElement = document.importNode(postTemplate.content, true)
             postElement.querySelector('h2').textContent = post.title.toUpperCase()
@@ -79,7 +80,12 @@ async function createPost(title, content) {
         userId: userId
     }
 
-    sendHTTPRequestOLD('POST', 'https://jsonplaceholder.typicode.com/posts', post)
+    const formDATA = new FormData(form)
+    // formDATA.append('title', title)
+    // formDATA.append('body', content)
+    formDATA.append('userId', userId)
+
+    sendHTTPRequestMODERN('POST', 'https://jsonplaceholder.typicode.com/posts', formDATA)
 }
 
 // Trigger a request via User Interface!
