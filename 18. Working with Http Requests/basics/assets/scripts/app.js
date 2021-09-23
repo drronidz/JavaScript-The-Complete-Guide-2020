@@ -9,6 +9,7 @@ function sendHTTPRequestOLD(method, url, data) {
     // The old way of sending HTTP Request via xmlHttpRequest
     return new Promise((resolve, reject) => {
         const xmlHttpRequest = new XMLHttpRequest()
+        xmlHttpRequest.setRequestHeader('Content-Type', 'application/json')
         xmlHttpRequest.open(method, url)
         xmlHttpRequest.responseType = 'json'
 
@@ -32,15 +33,30 @@ function sendHTTPRequestMODERN(method, url, data) {
     // The modern way of sending HTTP Request via fetch API (Application Programming Interface)
     return fetch(url, {
         method : method,
-        body: JSON.stringify(data)
-    }).then(response => {
-        return response.json()
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
     })
+        .then(response => {
+            if (response.status >= 200 && response.status < 300) {
+                return response.json()
+            } else {
+                response.json().then(errorDATA => {
+                    console.log(errorDATA)
+                    throw new Error('Something went wrong - server side !')
+                })
+            }
+    })
+        .catch(error => {
+            console.log(error)
+            throw new Error('Something went wrong!')
+        })
 }
 
 async function fetchPosts() {
     try {
-        const listOfPosts = await sendHTTPRequestMODERN('GET', 'https://jsonplaceholder.typicode.com/posts')
+        const listOfPosts = await sendHTTPRequestMODERN('GET', 'https://jsonplaceholder.typicode.com/pos')
         for (const post of listOfPosts) {
             const postElement = document.importNode(postTemplate.content, true)
             postElement.querySelector('h2').textContent = post.title.toUpperCase()
