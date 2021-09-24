@@ -19,7 +19,7 @@ export class ProjectItem {
         const projectElement = document.getElementById(this.id);
         const tooltipText = projectElement.dataset.extraInfo;
         // bundling (we don't need a tooltip until we click on More Info button...!)
-        import('./Tooltip').then(module => {
+        import('./Tooltip.js').then(module => {
             const tooltip = new module.Tooltip(
                 () => {
                     this.hasActiveTooltip = false;
